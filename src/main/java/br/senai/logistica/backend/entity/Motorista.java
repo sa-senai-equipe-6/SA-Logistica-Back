@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,14 +16,17 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table
 @Entity
+@Table
 public class Motorista {
 
 	@Id
@@ -45,7 +47,7 @@ public class Motorista {
 	@NotNull(message = "A categoria é obrigatória")
 	Character categoria;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario")
 	Usuario usuario;
 	
