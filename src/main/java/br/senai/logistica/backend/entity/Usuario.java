@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AccessLevel;
@@ -29,7 +30,7 @@ public class Usuario {
 	@Size(min = 5, max = 50, message = "O nome completo deve conter de {min} a {max} caracteres")
 	String nomeCompleto;
 	
-	@Column
+	@Column(unique = true)
 	@NotEmpty(message = "O login é obrigatorio")
 	@Size(min = 2, max = 20, message = "O login deve conter de {min} a {max} caracteres")
 	String login;
@@ -37,6 +38,7 @@ public class Usuario {
 	@Column
 	@NotEmpty(message = "A senha é obrigatoria")
 	@Size(min = 2, max = 10, message = "A senha deve conter de {min} a {max} caracteres")
+	@Pattern(regexp = "([0-9]+[a-zA-Z]+)|([a-zA-Z]+[0-9]+)", message = "A senha deve conter letras e numeros")
 	String senha;
 	
 	@Column
