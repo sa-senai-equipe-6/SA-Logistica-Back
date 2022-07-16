@@ -2,6 +2,9 @@ package br.senai.logistica.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 @SpringBootApplication
 public class InitApp {
@@ -10,4 +13,9 @@ public class InitApp {
 		SpringApplication.run(InitApp.class, args);
 	}
 
+	@Bean
+	public Hibernate5Module jsonHibernate5Module() {
+		return new Hibernate5Module();
+	}
+	
 }
