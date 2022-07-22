@@ -25,6 +25,12 @@ public class MotoristaService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	public Motorista buscarPor(
+			@NotNull
+			Integer idUsuario) {
+		return this.motoristaRepository.buscarPor(idUsuario);
+	}
+	
 	public Motorista inserir(
 			@Valid
 			@NotNull(message = "O novo motorista é obrigatorio")
