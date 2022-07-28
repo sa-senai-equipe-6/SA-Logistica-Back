@@ -26,7 +26,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table
+@Table(name = "motoristas")
 public class Motorista {
 
 	@Id

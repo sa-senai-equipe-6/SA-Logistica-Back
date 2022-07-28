@@ -4,4 +4,8 @@ public class RegistroNaoEncontradoException extends RuntimeException {
 
 	private static final long serialVersionUID = 2469420101L;
 
+	public RegistroNaoEncontradoException(String msg) {
+		super(msg);
+	}
+	
 }
