@@ -21,6 +21,9 @@ public class MeioTransporteService {
 	@Autowired
 	private MeioTransporteRepository repository;
 	
+	@Autowired
+	private MotoristaService motoristaService;
+	
 	public MeioTransporte inserir(
 			@Valid
 			@NotNull(message = "O meio de transporte é obrigatorio")
@@ -34,7 +37,6 @@ public class MeioTransporteService {
 			@Valid
 			@NotNull(message = "O meio de transporte é obrigatorio")
 			MeioTransporte transporteRecebido) {
-		
 		Preconditions.checkArgument(transporteRecebido.getId() != null, "O id do meio de transporte é obrigatorio");
 		return repository.save(transporteRecebido);
 	}
@@ -48,6 +50,11 @@ public class MeioTransporteService {
 	
 	public List<MeioTransporte> listarTodos() {
 		return repository.findAll();
+	}
+
+	public MeioTransporte buscarPorMotorista(String nome) {
+		var motorista = motoristaService.buscarPor(nome);
+		return repository.buscarPorMotorista(motorista.getId());
 	}
 	
 }

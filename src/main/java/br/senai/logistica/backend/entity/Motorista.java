@@ -20,10 +20,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
+@RequiredArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "motoristas")
@@ -33,22 +38,27 @@ public class Motorista {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
+	@NonNull
 	@Column(unique = true)
 	@NotEmpty(message = "A cnh não pode ser vazia")
 	@Pattern(regexp = "^[0-9]{9}$", message = "A cnh deve conter o formato NNNNNNNNN")
 	String cnh;
 	
+	@NonNull
 	@Column
 	@NotNull(message = "A data de renovacao é obrigatoria")
 	@Future(message = "A data de renovação não pode ser anterior a data atual")
 	LocalDate dataRenovacao;
 	
+	@NonNull
 	@Column
 	@NotNull(message = "A categoria é obrigatória")
 	Character categoria;
 	
+	@NonNull
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario")
+	@NotNull(message = "O motorista deve ter um usuário")
 	Usuario usuario;
 	
 }

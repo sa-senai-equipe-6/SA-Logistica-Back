@@ -13,7 +13,6 @@ import com.google.common.base.Preconditions;
 
 import br.senai.logistica.backend.entity.Motorista;
 import br.senai.logistica.backend.repository.MotoristaRepository;
-import br.senai.logistica.backend.repository.UsuarioRepository;
 
 @Service
 @Validated
@@ -23,12 +22,25 @@ public class MotoristaService {
 	private MotoristaRepository motoristaRepository;
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioService usuarioService;
 	
 	public Motorista buscarPor(
 			@NotNull
+			Integer id) {
+		return this.motoristaRepository.buscarPor(id);
+	}
+	
+	public Motorista buscarPorUsuario(
+			@NotNull
 			Integer idUsuario) {
-		return this.motoristaRepository.buscarPor(idUsuario);
+		return this.motoristaRepository.buscarPorUsuario(idUsuario);
+	}
+	
+	public Motorista buscarPor(
+			@NotNull
+			String nome) {
+		Integer idUsuario = usuarioService.buscarNome(String.format("%%%s%%", nome)).getId();
+		return motoristaRepository.buscarPorUsuario(idUsuario);
 	}
 	
 	public Motorista inserir(
@@ -51,8 +63,6 @@ public class MotoristaService {
 			@Valid
 			@NotNull(message = "O motorista é obrigatorio")
 			Motorista motoristaRecebido) {
-		
-		validarCampos(motoristaRecebido);
 		Preconditions.checkArgument(motoristaRecebido.getId() != null, "O id do motorista é obrigatorio");
 		return motoristaRepository.save(motoristaRecebido);
 	}
@@ -64,7 +74,7 @@ public class MotoristaService {
 	private void validarCampos(Motorista motoristaRecebido) {
 		Preconditions.checkArgument(motoristaRepository.buscarPor(motoristaRecebido.getCnh()) == null, 
 				"Ja existe um motorista com este CNH cadastrado");
-		Preconditions.checkArgument(usuarioRepository.buscarPor(motoristaRecebido.getUsuario().getLogin()) == null,
+		Preconditions.checkArgument(usuarioService.buscarLogin(motoristaRecebido.getUsuario().getLogin()) == null,
 				"Ja existe um motorista com este login cadastrado");
 	}
 	

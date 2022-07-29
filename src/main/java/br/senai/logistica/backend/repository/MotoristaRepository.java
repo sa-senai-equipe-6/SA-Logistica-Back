@@ -17,9 +17,12 @@ public interface MotoristaRepository extends JpaRepository<Motorista, Integer>{
 			@Param("cnh") String cnh);
 
 	@Query("SELECT m FROM Motorista m WHERE m.usuario.id = :id")
-	Motorista buscarPor(
+	Motorista buscarPorUsuario(
 			@NotNull 
 			@Param("id")
 			Integer idUsuario);
+
+	@Query("SELECT m FROM Motorista m WHERE m.id = :id")
+	Motorista buscarPor(@NotNull Integer id);
 	
 }

@@ -2,12 +2,15 @@ package br.senai.logistica.backend.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
@@ -43,9 +46,9 @@ public class MeioTransporte {
 	@Size(min = 10, max = 1500, message = "A descricao deve conter entre {min} e {max} caracteres")
 	String descricao;
 	
-	@OneToOne
-	@NotNull(message = "O motorista é obrigatorio")
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_motorista")
+	@NotNull(message = "O motorista é obrigatorio")
 	Motorista motorista;
 	
 }
