@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +28,8 @@ public class MotoristaController {
 	public ResponseEntity<?> inserirMotorista(
 			@RequestBody
 			Motorista motorista) {
-		service.inserir(motorista);
-		return ResponseEntity.created(URI.create("")).build();
+		Motorista motoristaInserido = service.inserir(motorista);
+		return ResponseEntity.created(URI.create("/id/" + motoristaInserido.getId())).build();
 	}
 	
 	@PutMapping
@@ -39,11 +40,11 @@ public class MotoristaController {
 		return ResponseEntity.ok().build();
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("id/{id}")
 	public ResponseEntity<?> deletarMotorista(
-			@RequestBody
-			Motorista motorista) {
-		service.deletarPor(motorista.getId());
+			@PathVariable("id")
+			Integer idMotorista) {
+		service.deletarPor(idMotorista);
 		return ResponseEntity.ok().build();
 	}
 			
@@ -51,6 +52,14 @@ public class MotoristaController {
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {
 		List<Motorista> motoristas = service.listar();
+		return ResponseEntity.ok(motoristas);
+	}
+	
+	@GetMapping("filtro/{filtro}")
+	public ResponseEntity<?> listarComFiltro(
+			@PathVariable("filtro")
+			String filtro) {
+		var motoristas = service.buscarPor(filtro);
 		return ResponseEntity.ok(motoristas);
 	}
 	

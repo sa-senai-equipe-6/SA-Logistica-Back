@@ -36,11 +36,10 @@ public class MotoristaService {
 		return this.motoristaRepository.buscarPorUsuario(idUsuario);
 	}
 	
-	public Motorista buscarPor(
+	public List<Motorista> buscarPor(
 			@NotNull
 			String nome) {
-		Integer idUsuario = usuarioService.buscarNome(String.format("%%%s%%", nome)).getId();
-		return motoristaRepository.buscarPorUsuario(idUsuario);
+		return motoristaRepository.buscarPorNome(String.format("%%%s%%", nome));
 	}
 	
 	public Motorista inserir(

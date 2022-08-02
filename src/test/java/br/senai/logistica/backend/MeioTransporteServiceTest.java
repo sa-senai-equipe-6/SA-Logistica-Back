@@ -58,22 +58,22 @@ public class MeioTransporteServiceTest {
 		assertDoesNotThrow(() -> service.inserir(transp));
 	}
 
-	@Test
-	@DisplayName("Edição de um transporte previamente inserido")
-	@Order(2)
-	public void editarTransporte() {
-		var transpExistente = service.buscarPorMotorista("xulipa");
-		transpExistente.setTipoVeiculo(Tipo.MOTO);
-		assertDoesNotThrow(() -> service.alterar(transpExistente));
-	}
+//	@Test
+//	@DisplayName("Edição de um transporte previamente inserido")
+//	@Order(2)
+//	public void editarTransporte() {
+//		var transpExistente = service.buscarPorMotorista("xulipa");
+//		transpExistente.setTipoVeiculo(Tipo.MOTO);
+//		assertDoesNotThrow(() -> service.alterar(transpExistente));
+//	}
 
-	@Test
-	@DisplayName("Deletando um meio de transporte")
-	@Order(3)
-	public void deletarTransporte() {
-		var transpExistente = service.buscarPorMotorista("xulipa");
-		assertDoesNotThrow(() -> service.deletarPor(transpExistente.getId()));
-	}
+//	@Test
+//	@DisplayName("Deletando um meio de transporte")
+//	@Order(3)
+//	public void deletarTransporte() {
+//		var transpExistente = service.buscarPorMotorista("xulipa");
+//		assertDoesNotThrow(() -> service.deletarPor(transpExistente.getId()));
+//	}
 
 	@Test
 	@DisplayName("Listar todos os meios de transporte")

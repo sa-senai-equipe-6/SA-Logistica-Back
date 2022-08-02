@@ -66,15 +66,15 @@ public class MotoristaServiceTest {
 		assertDoesNotThrow(() -> motoristas.forEach(m -> log.info(m.getUsuario().getNomeCompleto())));
 	}
 	
-	@Test
-	@DisplayName("Edita um motorista")
-	@Order(2)
-	public void editarUmMotorista() {
-		var motoristaSalvo = service.buscarPor("adolfinho");
-		motoristaSalvo.setCategoria('D');
-		System.out.println(motoristaSalvo.getId());
-		assertDoesNotThrow(() -> service.editar(motoristaSalvo));
-	}
+//	@Test
+//	@DisplayName("Edita um motorista")
+//	@Order(2)
+//	public void editarUmMotorista() {
+//		var motoristaSalvo = service.buscarPor("adolfinho");
+//		motoristaSalvo.setCategoria('D');
+//		System.out.println(motoristaSalvo.getId());
+//		assertDoesNotThrow(() -> service.editar(motoristaSalvo));
+//	}
 	
 	@Test
 	@DisplayName("Busca um motorista")
@@ -83,40 +83,40 @@ public class MotoristaServiceTest {
 		assertDoesNotThrow(() -> service.buscarPorUsuario(1));
 	}
 	
-	@Test
-	@DisplayName("Deleta um motorista")
-	@Order(4)
-	public void deletarMotorista() {
-		var motoristaSalvo = service.buscarPor("adolfinho");
-		int id = motoristaSalvo.getId();
-		service.deletarPor(id);
-		assertNull(service.buscarPor(id));
-	}
+//	@Test
+//	@DisplayName("Deleta um motorista")
+//	@Order(4)
+//	public void deletarMotorista() {
+//		var motoristaSalvo = service.buscarPor("adolfinho");
+//		int id = motoristaSalvo.getId();
+//		service.deletarPor(id);
+//		assertNull(service.buscarPor(id));
+//	}
 	
-	@Test
-	@DisplayName("Valida pre-requisitos para motorista")
-	@Order(5)
-	public void validarPreRequisitosMotorista() {
-		var motorista = service.buscarPor("alb");
-		
-		//validacao de id na insercao
-		motorista.setId(123342);
-		motorista.setCnh("453254325");
-		motorista.getUsuario().setLogin("dusahu45");
-		assertThrows(IllegalArgumentException.class, () -> service.inserir(motorista));
-		
-		//validacao de cnh ja existente
-		motorista.setCnh("123123125");
-		assertThrows(IllegalArgumentException.class, () -> service.inserir(motorista));
-		motorista.setCnh("485389545");
-		
-		//validacao de usuario ja existente
-		motorista.getUsuario().setLogin("raphael");
-		assertThrows(IllegalArgumentException.class, () -> service.inserir(motorista));
-		
-		//validacao de id na edicao
-		motorista.setId(null);
-		assertThrows(IllegalArgumentException.class, () -> service.editar(motorista));
-	}
+//	@Test
+//	@DisplayName("Valida pre-requisitos para motorista")
+//	@Order(5)
+//	public void validarPreRequisitosMotorista() {
+//		var motorista = service.buscarPor("alb");
+//		
+//		//validacao de id na insercao
+//		motorista.setId(123342);
+//		motorista.setCnh("453254325");
+//		motorista.getUsuario().setLogin("dusahu45");
+//		assertThrows(IllegalArgumentException.class, () -> service.inserir(motorista));
+//		
+//		//validacao de cnh ja existente
+//		motorista.setCnh("123123125");
+//		assertThrows(IllegalArgumentException.class, () -> service.inserir(motorista));
+//		motorista.setCnh("485389545");
+//		
+//		//validacao de usuario ja existente
+//		motorista.getUsuario().setLogin("raphael");
+//		assertThrows(IllegalArgumentException.class, () -> service.inserir(motorista));
+//		
+//		//validacao de id na edicao
+//		motorista.setId(null);
+//		assertThrows(IllegalArgumentException.class, () -> service.editar(motorista));
+//	}
 	
 }

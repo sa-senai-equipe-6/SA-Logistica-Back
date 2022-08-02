@@ -31,7 +31,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "motoristas")
+@Table(name = "motorista")
 public class Motorista {
 
 	@Id

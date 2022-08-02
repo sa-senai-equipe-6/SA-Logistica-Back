@@ -52,9 +52,9 @@ public class MeioTransporteService {
 		return repository.findAll();
 	}
 
-	public MeioTransporte buscarPorMotorista(String nome) {
-		var motorista = motoristaService.buscarPor(nome);
-		return repository.buscarPorMotorista(motorista.getId());
-	}
+//	public MeioTransporte buscarPorMotorista(String cnh) {
+//		var motorista = motoristaService.buscarPor(cnh);
+//		return repository.buscarPorMotorista));
+//	}
 	
 }
