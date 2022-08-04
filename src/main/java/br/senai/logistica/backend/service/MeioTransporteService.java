@@ -21,9 +21,6 @@ public class MeioTransporteService {
 	@Autowired
 	private MeioTransporteRepository repository;
 	
-	@Autowired
-	private MotoristaService motoristaService;
-	
 	public MeioTransporte inserir(
 			@Valid
 			@NotNull(message = "O meio de transporte é obrigatorio")
@@ -51,10 +48,5 @@ public class MeioTransporteService {
 	public List<MeioTransporte> listarTodos() {
 		return repository.findAll();
 	}
-
-//	public MeioTransporte buscarPorMotorista(String cnh) {
-//		var motorista = motoristaService.buscarPor(cnh);
-//		return repository.buscarPorMotorista));
-//	}
 	
 }
