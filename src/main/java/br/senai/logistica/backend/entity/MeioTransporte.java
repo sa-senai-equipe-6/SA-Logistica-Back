@@ -45,7 +45,7 @@ public class MeioTransporte {
 	@Size(min = 10, max = 1500, message = "A descricao deve conter entre {min} e {max} caracteres")
 	String descricao;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name = "id_motorista")
 	@NotNull(message = "O motorista é obrigatorio")
 	Motorista motorista;
