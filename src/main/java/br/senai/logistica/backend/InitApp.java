@@ -13,8 +13,7 @@ public class InitApp {
 		SpringApplication.run(InitApp.class, args);
 	}
 
-	@Bean
-	public Hibernate5Module jsonHibernate5Module() {
+	@Bean Hibernate5Module jsonHibernate5Module() {
 		return new Hibernate5Module();
 	}
 	

@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ public class MeioTransporteController {
 		return ResponseEntity.ok(listaMeioTransportes);
 	}
 	
-	@PutMapping()
+	@PutMapping
 	public ResponseEntity<?> editarTransporte(
 			@NotNull
 			@RequestBody
@@ -38,12 +39,29 @@ public class MeioTransporteController {
 		return ResponseEntity.ok().build();
 	}
 	
-	@PostMapping()
+	@PostMapping
 	public ResponseEntity<?> inserirTransporte(
 			@NotNull
 			@RequestBody
 			MeioTransporte novoTransporte) {
-		return ResponseEntity.created(URI.create("")).build();
+		MeioTransporte cadastrado = service.inserir(novoTransporte);
+		return ResponseEntity.created(URI.create("")).body(cadastrado);
+	}
+	
+	@GetMapping("id/{id}")
+	public ResponseEntity<?>  buscarTransporte(
+			@PathVariable("id")
+			Integer idTransporte) {
+		MeioTransporte motoristaEncontrado = service.buscarPor(idTransporte);
+		return ResponseEntity.ok(motoristaEncontrado);
+	}
+	
+	@GetMapping("filtro/{filtro}")
+	public ResponseEntity<?> listarComFiltro(
+			@PathVariable("filtro")
+			String filtro) {
+		var transportes = service.buscarPor(filtro);
+		return ResponseEntity.ok(transportes);
 	}
 	
 }

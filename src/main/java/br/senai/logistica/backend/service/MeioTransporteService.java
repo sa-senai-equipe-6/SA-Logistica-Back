@@ -48,5 +48,13 @@ public class MeioTransporteService {
 	public List<MeioTransporte> listarTodos() {
 		return repository.findAll();
 	}
+
+	public MeioTransporte buscarPor(Integer idTransporte) {
+		return repository.buscarPor(idTransporte);
+	}
+
+	public List<MeioTransporte> buscarPor(String nomeMotorista) {
+		return repository.buscarPorMotorista(String.format("%%%s%%", nomeMotorista));
+	}
 	
 }

@@ -2,6 +2,7 @@ package br.senai.logistica.backend.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,7 +45,7 @@ public class MeioTransporte {
 	@Size(min = 10, max = 1500, message = "A descricao deve conter entre {min} e {max} caracteres")
 	String descricao;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinColumn(name = "id_motorista")
 	@NotNull(message = "O motorista é obrigatorio")
 	Motorista motorista;
