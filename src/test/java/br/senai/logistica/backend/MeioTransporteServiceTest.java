@@ -1,5 +1,6 @@
 package br.senai.logistica.backend;
 
+import static org.assertj.core.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -58,22 +59,30 @@ public class MeioTransporteServiceTest {
 		assertDoesNotThrow(() -> service.inserir(transp));
 	}
 
-//	@Test
-//	@DisplayName("Edição de um transporte previamente inserido")
-//	@Order(2)
-//	public void editarTransporte() {
-//		var transpExistente = service.buscarPorMotorista("xulipa");
-//		transpExistente.setTipoVeiculo(Tipo.MOTO);
-//		assertDoesNotThrow(() -> service.alterar(transpExistente));
-//	}
+	@Test
+	@DisplayName("Edição de um transporte previamente inserido")
+	@Order(2)
+	public void editarTransporte() {
+		var transpExistente = service.buscarPor("xulipa").stream().findFirst().orElse(null);
+		
+		if (transpExistente == null)
+			fail("Transporte null");
+		
+		transpExistente.setTipoVeiculo(Tipo.MOTO);
+		assertDoesNotThrow(() -> service.alterar(transpExistente));
+	}
 
-//	@Test
-//	@DisplayName("Deletando um meio de transporte")
-//	@Order(3)
-//	public void deletarTransporte() {
-//		var transpExistente = service.buscarPorMotorista("xulipa");
-//		assertDoesNotThrow(() -> service.deletarPor(transpExistente.getId()));
-//	}
+	@Test
+	@DisplayName("Deletando um meio de transporte")
+	@Order(3)
+	public void deletarTransporte() {
+		var transpExistente = service.buscarPor("xulipa").stream().findFirst().orElse(null);
+		
+		if (transpExistente == null)
+			fail("Transporte null");
+		
+		assertDoesNotThrow(() -> service.deletarPor(transpExistente.getId()));
+	}
 
 	@Test
 	@DisplayName("Listar todos os meios de transporte")
