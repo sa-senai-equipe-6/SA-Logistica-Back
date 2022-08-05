@@ -56,6 +56,14 @@ public class MotoristaController {
 		return ResponseEntity.ok(motoristaEncontrado);
 	}
 	
+	@GetMapping("/usuario/id/{id}")
+	public ResponseEntity<?>  buscarMotoristaPorUsuario(
+			@PathVariable("id")
+			Integer idMotorista) {
+		Motorista motoristaEncontrado = service.buscarPorUsuario(idMotorista);
+		return ResponseEntity.ok(motoristaEncontrado);
+	}
+	
 	
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {

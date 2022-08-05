@@ -12,8 +12,8 @@ import br.senai.logistica.backend.entity.MeioTransporte;
 @Repository
 public interface MeioTransporteRepository extends JpaRepository<MeioTransporte, Integer>{
 
-	@Query("SELECT mt FROM MeioTransporte mt WHERE UPPER(mt.motorista.usuario.nomeCompleto) LIKE UPPER(:nome)")
-	public List<MeioTransporte> buscarPorMotorista(@Param("nome") String nome);
+	@Query("SELECT mt FROM MeioTransporte mt WHERE UPPER(mt.descricao) LIKE UPPER(:descricao)")
+	public List<MeioTransporte> buscarPorDescricao(@Param("descricao") String descricao);
 
 	default MeioTransporte buscarPor(Integer id) {
 		return this.findById(id).get();

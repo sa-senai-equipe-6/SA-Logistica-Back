@@ -53,8 +53,8 @@ public class MeioTransporteService {
 		return repository.buscarPor(idTransporte);
 	}
 
-	public List<MeioTransporte> buscarPor(String nomeMotorista) {
-		return repository.buscarPorMotorista(String.format("%%%s%%", nomeMotorista));
+	public List<MeioTransporte> buscarPor(String descricao) {
+		return repository.buscarPorDescricao(String.format("%%%s%%", descricao));
 	}
 	
 }

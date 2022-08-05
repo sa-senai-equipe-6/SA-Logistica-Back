@@ -63,7 +63,7 @@ public class MeioTransporteServiceTest {
 	@DisplayName("Edição de um transporte previamente inserido")
 	@Order(2)
 	public void editarTransporte() {
-		var transpExistente = service.buscarPor("xulipa").stream().findFirst().orElse(null);
+		var transpExistente = service.buscarPor("legal").stream().findFirst().orElse(null);
 		
 		if (transpExistente == null)
 			fail("Transporte null");
@@ -76,7 +76,7 @@ public class MeioTransporteServiceTest {
 	@DisplayName("Deletando um meio de transporte")
 	@Order(3)
 	public void deletarTransporte() {
-		var transpExistente = service.buscarPor("xulipa").stream().findFirst().orElse(null);
+		var transpExistente = service.buscarPor("legal").stream().findFirst().orElse(null);
 		
 		if (transpExistente == null)
 			fail("Transporte null");

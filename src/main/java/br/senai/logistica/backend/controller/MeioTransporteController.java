@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,14 @@ public class MeioTransporteController {
 			Integer idTransporte) {
 		MeioTransporte motoristaEncontrado = service.buscarPor(idTransporte);
 		return ResponseEntity.ok(motoristaEncontrado);
+	}
+	
+	@DeleteMapping("id/{id}")
+	public ResponseEntity<?>  deletarTransporte(
+			@PathVariable("id")
+			Integer idTransporte) {
+		service.deletarPor(idTransporte);
+		return ResponseEntity.ok().build();
 	}
 	
 	@GetMapping("filtro/{filtro}")
