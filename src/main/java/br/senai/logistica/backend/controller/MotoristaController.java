@@ -29,7 +29,7 @@ public class MotoristaController {
 			@RequestBody
 			Motorista motorista) {
 		Motorista motoristaInserido = service.inserir(motorista);
-		return ResponseEntity.created(URI.create("/id/" + motoristaInserido.getId())).build();
+		return ResponseEntity.created(URI.create("/id/" + motoristaInserido.getId())).body(motoristaInserido);
 	}
 	
 	@PutMapping
@@ -47,7 +47,15 @@ public class MotoristaController {
 		service.deletarPor(idMotorista);
 		return ResponseEntity.ok().build();
 	}
-			
+	
+	@GetMapping("id/{id}")
+	public ResponseEntity<?>  buscarMotorista(
+			@PathVariable("id")
+			Integer idMotorista) {
+		Motorista motoristaEncontrado = service.buscarPor(idMotorista);
+		return ResponseEntity.ok(motoristaEncontrado);
+	}
+	
 	
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {
